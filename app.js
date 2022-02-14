@@ -2,18 +2,36 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const mongoose = require('mongoose')
+
 const mainRoute = require('./routes/mainRoute')
+const authRoute = require('./routes/authRoute')
 
 const port = process.env.PORT || 3001;
 
+const dbURI = "mongodb+srv://kafein:kafeinfaita@cluster0.3xefo.mongodb.net/school?retryWrites=true&w=majority"
+
+const connectDB = async () => {
+    try {
+        await mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
+        app.listen(port, () => {
+            console.log(`Listening on port ${port}`)
+        })
+        console.log('Connected to DB!')
+    } catch (err) {
+        console.log("Connection to DB failed!")
+    }
+}
+
+connectDB();
+
 app.use(express.json());
 app.use(cors());
+
 app.use(mainRoute)
+app.use(authRoute)
 
-app.listen(port, () => {
-    console.log(`listening on port ${port}`);
+app.get('/',(req,res) => {
+    res.send("TEST");
 })
 
-app.get('/test',(req,res) => {
-    res.send('hello');
-})
