@@ -3,6 +3,5 @@ module.exports.student_GET = (req, res) => {
 }
 
 module.exports.student_POST = (req, res) => {
-    const { fname,lname } = req.body;
-    res.json({ fname,lname });
+    console.log(req.body);
 }
