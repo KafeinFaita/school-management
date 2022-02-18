@@ -46,12 +46,7 @@ module.exports.signup_post = async (req, res) => {
     console.log(newUser)
 
     try {
-<<<<<<< HEAD
         const saveUser = await newUser.save();
-=======
-        const saveUser = await newUser.save()
-        res.json({ redirect:'/login' })
->>>>>>> 0883b99bb5d76bc0f623acbf5d0d2c149077a3c7
     } catch (error) {
         res.send(error)
     }
@@ -69,7 +64,7 @@ module.exports.login_post = async (req, res) => {
             
             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
             console.log(token)
-            // res.status(200).json({ redirect: '/dashboard' })
+            res.status(200).json({ redirect: '/dashboard' })
         } else {
             console.log("Incorrect password!")
         }
