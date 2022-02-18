@@ -20,8 +20,7 @@ module.exports.user_post = async (req, res) => {
     console.log(newUser)
 
     try {
-        const saveUser = await newUser.save()
-        res.send()
+        const saveUser = await newUser.save();
     } catch (error) {
         res.send(error)
     }
