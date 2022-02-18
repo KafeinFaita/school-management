@@ -26,7 +26,7 @@ const connectDB = async () => {
 connectDB();
 
 app.use(express.json());
-app.use(cors());
+app.use(cors()); 
 
 app.use(mainRoute)
 app.use(authRoute)
