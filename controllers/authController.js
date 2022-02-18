@@ -46,8 +46,12 @@ module.exports.signup_post = async (req, res) => {
     console.log(newUser)
 
     try {
+<<<<<<< HEAD
+        const saveUser = await newUser.save();
+=======
         const saveUser = await newUser.save()
         res.json({ redirect:'/login' })
+>>>>>>> 0883b99bb5d76bc0f623acbf5d0d2c149077a3c7
     } catch (error) {
         res.send(error)
     }
