@@ -21,7 +21,7 @@ module.exports.user_post = async (req, res) => {
 
     try {
         const saveUser = await newUser.save()
-        res.send()
+        res.json({ redirect:'/login' })
     } catch (error) {
         res.send(error)
     }
