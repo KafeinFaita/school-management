@@ -1,6 +1,17 @@
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const User = require('../models/User')
+
+//create token
+const maxAge = 3 * 24 * 60 * 60
+const createToken = id => {
+    return jwt.sign({ id }, 'schooldb secret', {
+        expiresIn: maxAge
+    })
+}
+
+//GET
 
 module.exports.user_get = async (req, res) => {
     try {
@@ -12,7 +23,22 @@ module.exports.user_get = async (req, res) => {
     }
 }
 
-module.exports.user_post = async (req, res) => {
+module.exports.dashboard_get = async (req, res) => {
+    const token = req.cookies.jwt
+    // console.log(token)
+    // res.json({ msg: "hi" })
+    jwt.verify(token, 'schooldb secret', (err, decodedToken) => {
+        if (err) {
+            console.log(err.message)
+            res.json({ verified: false })
+        } else {
+            res.json({ verified: true })
+        }
+    })
+}
+
+
+module.exports.signup_post = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
@@ -27,14 +53,19 @@ module.exports.user_post = async (req, res) => {
     }
 }
 
-module.exports.user_login = async (req, res) => {
+module.exports.login_post = async (req, res) => {
     const user = await User.findOne({ username: req.body.username })
     
     if (user){
         const auth = await bcrypt.compare(req.body.password, user.password)
+        console.log(auth)
         
         if (auth) {
-            console.log("Logged in!")
+            const token = createToken(user._id)
+            
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
+            console.log(token)
+            // res.status(200).json({ redirect: '/dashboard' })
         } else {
             console.log("Incorrect password!")
         }
