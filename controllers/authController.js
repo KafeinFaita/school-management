@@ -23,7 +23,7 @@ module.exports.user_get = async (req, res) => {
     }
 }
 
-module.exports.dashboard_get = async (req, res) => {
+module.exports.auth_user = async (req, res) => {
     const token = req.cookies.jwt
     // console.log(token)
     // res.json({ msg: "hi" })
@@ -65,6 +65,7 @@ module.exports.login_post = async (req, res) => {
             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
             console.log(token)
             res.status(200).json({ redirect: '/dashboard' })
+            
         } else {
             console.log("Incorrect password!")
         }
