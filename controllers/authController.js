@@ -13,7 +13,7 @@ const createToken = id => {
 
 //GET
 
-module.exports.user_get = async (req, res) => {
+module.exports.user_get = async (req, res, next) => {
     try {
         const users = await User.find()
         console.log(users)
@@ -23,19 +23,19 @@ module.exports.user_get = async (req, res) => {
     }
 }
 
-module.exports.auth_user = async (req, res) => {
-    const token = req.cookies.jwt
-    // console.log(token)
-    // res.json({ msg: "hi" })
-    jwt.verify(token, 'schooldb secret', (err, decodedToken) => {
-        if (err) {
-            console.log(err.message)
-            res.json({ verified: false })
-        } else {
-            res.json({ verified: true })
-        }
-    })
-}
+// module.exports.auth_user = async (req, res) => {
+//     const token = req.cookies.jwt
+//     // console.log(token)
+//     // res.json({ msg: "hi" })
+//     jwt.verify(token, 'schooldb secret', (err, decodedToken) => {
+//         if (err) {
+//             console.log(err.message)
+//             res.json({ verified: false })
+//         } else {
+//             res.json({ verified: true })
+//         }
+//     })
+// }
 
 
 module.exports.signup_post = async (req, res) => {
