@@ -52,12 +52,12 @@ module.exports.login_post = async (req, res) => {
             
             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
             console.log(token)
-            res.status(200).json({ redirect: '/dashboard' })
+            res.status(200).json({ redirect: '/dashboard',username: user.username })
             
         } else {
-            console.log("Incorrect password!")
+            res.status(500).json({ passErr: "incorrect password!" })
         }
     } else {
-        console.log("User doesn't exist!")
+        res.status(500).json({ userErr: 'user does not exist!' });
     }
 }
