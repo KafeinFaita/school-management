@@ -23,31 +23,19 @@ module.exports.user_get = async (req, res, next) => {
     }
 }
 
-// module.exports.auth_user = async (req, res) => {
-//     const token = req.cookies.jwt
-//     // console.log(token)
-//     // res.json({ msg: "hi" })
-//     jwt.verify(token, 'schooldb secret', (err, decodedToken) => {
-//         if (err) {
-//             console.log(err.message)
-//             res.json({ verified: false })
-//         } else {
-//             res.json({ verified: true })
-//         }
-//     })
-// }
-
-
 module.exports.signup_post = async (req, res) => {
+
+    console.log(req.body)
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
-    const newUser = new User({ username: req.body.username, password: hashedPassword })
+    const newUser = new User({ username: req.body.username, password: hashedPassword, role: req.body.role })
     console.log(newUser)
 
     try {
         const saveUser = await newUser.save();
     } catch (error) {
+        console.log(error)
         res.send(error)
     }
 }

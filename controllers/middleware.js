@@ -24,20 +24,19 @@ module.exports.auth_user_role = (role) => {
                     res.json({ verified: false })
                 } else {
                     let user = await User.findById(decodedToken.id)
-                    console.log(user.role)
 
                     // const userHasAccess = role.some(r => user.roles.includes(r)) <-- for multiple roles
                     
                     if (role.includes(user.role)) {
                         res.json({ verified: true })
                     } else {
-                        res.json({ verified: false })
+                        res.json({ verified: false, msg: "You don't have enough privilege to view this page."  })
                     }
                     
                 }
             })
         } else {
-            res.json({ verified: false })
+            res.json({ verified: false, msg: "Please log in." })
         }
     }
 }
