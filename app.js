@@ -7,15 +7,16 @@ const cookieParser = require('cookie-parser')
 
 const mainRoute = require('./routes/mainRoute')
 const authRoute = require('./routes/authRoute')
+const server = require('http').createServer();
 
-const port = process.env.PORT || 3001;
+const port = 3001 || process.env.PORT;
 
 const dbURI = "mongodb+srv://kafein:kafeinfaita@cluster0.3xefo.mongodb.net/school?retryWrites=true&w=majority"
 
 const connectDB = async () => {
     try {
         await mongoose.connect(dbURI, { useNewUrlParser: true, useUnifiedTopology: true })
-        app.listen(port, () => {
+        server.listen(port, () => {
             console.log(`Listening on port ${port}`)
         })
         console.log('Connected to DB!')
