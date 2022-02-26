@@ -5,6 +5,8 @@ const cors = require('cors');
 const mongoose = require('mongoose')
 const cookieParser = require('cookie-parser')
 
+app.use(cors());
+
 const mainRoute = require('./routes/mainRoute')
 const authRoute = require('./routes/authRoute')
 
@@ -27,7 +29,6 @@ const connectDB = async () => {
 connectDB();
 
 app.use(express.json());
-app.use(cors());
 app.use(cookieParser()) 
 
 app.use(mainRoute)
