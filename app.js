@@ -8,7 +8,7 @@ const cookieParser = require('cookie-parser')
 const mainRoute = require('./routes/mainRoute')
 const authRoute = require('./routes/authRoute')
 
-const port = process.env.PORT || 3001;
+const port = 3001 || process.env.PORT;
 
 const dbURI = "mongodb+srv://kafein:kafeinfaita@cluster0.3xefo.mongodb.net/school?retryWrites=true&w=majority"
 
