@@ -42,7 +42,6 @@ module.exports.signup_post = async (req, res) => {
 
 module.exports.login_post = async (req, res) => {
     const user = await User.findOne({ username: req.body.username })
-    
     if (user){
         const auth = await bcrypt.compare(req.body.password, user.password)
         console.log(auth)
@@ -52,7 +51,7 @@ module.exports.login_post = async (req, res) => {
             
             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
             console.log(token)
-            res.status(200).json({ redirect: '/dashboard',username: user.username })
+            res.status(200).json({ redirect: '/dashboard', username: user.username })
             
         } else {
             res.status(500).json({ passErr: "incorrect password!" })
