@@ -5,7 +5,8 @@ const { user_get, signup_post, login_post } = require('../controllers/authContro
 const { auth_user, auth_user_role } = require('../controllers/middleware');
 
 router.get('/user', user_get)
-router.get('/dashboard', auth_user_role(['Admin', 'Teacher']))
+router.get('/auth_user', auth_user)
+router.get('/auth_user_role', auth_user_role(['Admin', 'Teacher']))
 
 router.post('/signup', signup_post)
 router.post('/login', login_post)

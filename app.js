@@ -9,6 +9,7 @@ app.use(cors());
 
 const mainRoute = require('./routes/mainRoute')
 const authRoute = require('./routes/authRoute')
+const studentRoute = require('./routes/studentRoute')
 
 const port = process.env.PORT || 3001;
 
@@ -33,6 +34,8 @@ app.use(cookieParser())
 
 app.use(mainRoute)
 app.use(authRoute)
+app.use(studentRoute)
+
 
 app.get('/',(req,res) => {
     res.send("TEST");

@@ -25,12 +25,9 @@ module.exports.user_get = async (req, res, next) => {
 
 module.exports.signup_post = async (req, res) => {
 
-    console.log(req.body)
-
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
     const newUser = new User({ username: req.body.username, password: hashedPassword, role: req.body.role })
-    console.log(newUser)
 
     try {
         const saveUser = await newUser.save();
@@ -42,6 +39,7 @@ module.exports.signup_post = async (req, res) => {
 
 module.exports.login_post = async (req, res) => {
     const user = await User.findOne({ username: req.body.username })
+    console.log(req.body)
     if (user){
         const auth = await bcrypt.compare(req.body.password, user.password)
         console.log(auth)
