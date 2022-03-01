@@ -49,7 +49,7 @@ module.exports.login_post = async (req, res) => {
             
             res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 })
             console.log(token)
-            res.status(200).json({ redirect: '/dashboard', username: user.username })
+            res.status(200).json({ redirect: '/dashboard', username: user.username, role: user.role })
             
         } else {
             res.status(500).json({ passErr: "incorrect password!" })
