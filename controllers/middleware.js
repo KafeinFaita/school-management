@@ -40,9 +40,9 @@ module.exports.auth_user_role = (role) => {
                 // const userHasAccess = role.some(r => user.roles.includes(r)) <-- for multiple roles
                 
                 if (role.includes(user.role)) {
-                    res.json({ verified: true, authenticated: true })
+                    res.json({ verified: true, authorized: true })
                 } else {
-                    res.json({ verified: true, authenticated: false, msg: "You don't have enough privilege to view this page."  })
+                    res.json({ verified: true, authorized: false, msg: "You don't have enough privilege to view this page."  })
                 }
                 
             }
