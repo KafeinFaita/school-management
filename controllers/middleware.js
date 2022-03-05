@@ -2,16 +2,10 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User')
 
 module.exports.auth_user = (goToNext) => {
-    // const token = req.cookies.jwt
-    // jwt.verify(token, 'schooldb secret', (err, decodedToken) => {
-    //     if (err) {
-    //         console.log(err.message)
-    //         res.json({ verified: false })
-    //     } 
-    //     next()
-    // })
     return (req, res, next) => {
         const token = req.cookies.jwt
+        console.log(req.params)
+        console.log(req.url)
         jwt.verify(token, 'schooldb secret', (err, decodedToken) => {
             if (err) {
                 console.log(err.message)
@@ -29,7 +23,6 @@ module.exports.auth_user = (goToNext) => {
 module.exports.auth_user_role = (role) => {
     return (req, res) => {
         const token = req.cookies.jwt
-
         jwt.verify(token, 'schooldb secret', async (err, decodedToken) => {
             
             if (err) {
