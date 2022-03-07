@@ -23,6 +23,10 @@ module.exports.user_get = async (req, res, next) => {
     }
 }
 
+module.exports.logout_get = (req, res) => {
+    res.cookie('jwt', '', { maxAge: 1 })
+}
+
 module.exports.signup_post = async (req, res) => {
 
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
