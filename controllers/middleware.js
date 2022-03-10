@@ -4,8 +4,6 @@ const User = require('../models/User')
 module.exports.auth_user = (goToNext) => {
     return (req, res, next) => {
         const token = req.cookies.jwt
-        console.log(req.params)
-        console.log(req.url)
         jwt.verify(token, 'schooldb secret', (err, decodedToken) => {
             if (err) {
                 console.log(err.message)
@@ -20,8 +18,9 @@ module.exports.auth_user = (goToNext) => {
     }
 }
 
+
 module.exports.auth_user_role = (role) => {
-    return (req, res) => {
+    return (req, res, next) => {
         const token = req.cookies.jwt
         jwt.verify(token, 'schooldb secret', async (err, decodedToken) => {
             
@@ -33,7 +32,14 @@ module.exports.auth_user_role = (role) => {
                 // const userHasAccess = role.some(r => user.roles.includes(r)) <-- for multiple roles
                 
                 if (role.includes(user.role)) {
-                    res.json({ verified: true, authorized: true })
+
+                    if (user.isVerified) {
+                        res.json({ verified: true, authorized: true })
+                        return next()
+                    }
+
+                    res.json({ verified: false, msg: "You are not yet verified by the admin." })
+
                 } else {
                     res.json({ verified: true, authorized: false, msg: "You don't have enough privilege to view this page."  })
                 }
