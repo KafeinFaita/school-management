@@ -34,6 +34,13 @@ module.exports.auth_user_role = (role) => {
                 if (role.includes(user.role)) {
 
                     if (user.isVerified) {
+                        console.log(req.url)
+                        if (req.url === "/dashboard") {
+                            const userList = await User.find({role: { $nin: ['Admin'] }}, { password: 0 })
+                            res.json({ verified: true, authorized: true, userList })
+                            return next()
+                        }
+
                         res.json({ verified: true, authorized: true })
                         return next()
                     }

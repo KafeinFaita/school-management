@@ -20,7 +20,8 @@ const userSchema = new Schema({
     },
     isVerified: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false
     }
 })
 

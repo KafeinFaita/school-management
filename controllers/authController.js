@@ -26,7 +26,7 @@ module.exports.user_get = async (req, res, next) => {
 module.exports.dashboard_get = async (req, res) => {
     try {
         const users = await User.find({role: { $nin: ['Admin'] }})
-        console.log(users)
+        res.json(users)
     } catch (error) {
         console.log(error)
     }
@@ -42,6 +42,7 @@ module.exports.signup_post = async (req, res) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 10)
 
     const newUser = new User({ username: req.body.username, password: hashedPassword, role: req.body.role })
+    console.log(newUser)
 
     try {
         const saveUser = await newUser.save();
