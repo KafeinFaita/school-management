@@ -23,15 +23,6 @@ module.exports.user_get = async (req, res, next) => {
     }
 }
 
-module.exports.dashboard_get = async (req, res) => {
-    try {
-        const users = await User.find({role: { $nin: ['Admin'] }})
-        res.json(users)
-    } catch (error) {
-        console.log(error)
-    }
-}
-
 module.exports.logout_get = (req, res) => {
     res.cookie('jwt', '', { maxAge: 1 })
     res.send()

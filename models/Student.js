@@ -11,6 +11,37 @@ const requiredNumber = {
     required: true
 }
 
+const reqDefault = (sr) => {
+    return {
+        accomplished: {
+            type: Boolean,
+            default: false
+        },
+        stronglyRequired: {
+            type: Boolean,
+            default: sr
+        }
+    }
+}
+
+const requirements = {
+    reservationFee: reqDefault(false),
+    interview: reqDefault(true),
+    registrarConfirmation: reqDefault(true),
+    exam: reqDefault(true),
+    orNum: reqDefault(false),
+    reportCard: reqDefault(true),
+    picture: reqDefault(false),
+    visa9e: reqDefault(true),
+    escqvr: reqDefault(true),
+    additionalPic: reqDefault(false),
+    recForm: reqDefault(true),
+    gcc: reqDefault(true),
+    psa: reqDefault(true)
+}
+
+
+
 const studentSchema = new Schema({
     lastname: requiredString,
     firstname: requiredString,
@@ -31,7 +62,8 @@ const studentSchema = new Schema({
     session: {
         type: String
     },
-    lastschool: requiredString
+    lastschool: requiredString,
+    requirements
 })
 
 module.exports = mongoose.model('student', studentSchema)

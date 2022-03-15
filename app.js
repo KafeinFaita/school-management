@@ -7,8 +7,8 @@ const cookieParser = require('cookie-parser')
 
 app.use(cors());
 
-const mainRoute = require('./routes/mainRoute')
-const authRoute = require('./routes/authRoute')
+const getRoute = require('./routes/getRoute')
+const postRoute = require('./routes/postRoute')
 const studentRoute = require('./routes/studentRoute')
 
 const port = process.env.PORT || 3001;
@@ -32,8 +32,8 @@ connectDB();
 app.use(express.json());
 app.use(cookieParser()) 
 
-app.use(mainRoute)
-app.use(authRoute)
+app.use(getRoute)
+app.use(postRoute)
 app.use(studentRoute)
 
 
