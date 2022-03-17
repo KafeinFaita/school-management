@@ -37,6 +37,7 @@ module.exports.signup_post = async (req, res) => {
 
     try {
         const saveUser = await newUser.save();
+        res.status(201).json({redirect:'/login'})
     } catch (error) {
         console.log(error)
         res.send(error)
