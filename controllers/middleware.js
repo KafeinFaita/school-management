@@ -48,7 +48,7 @@ module.exports.auth_user_role = (role) => {
                         return next()
                     }
 
-                    res.json({ msg: "You are not yet verified by the admin." })
+                    res.status(403).json({ msg: "You are not yet verified by the admin." })
 
                 } else {
                     res.status(403).json({ msg: "You don't have enough privilege to view this page."  })

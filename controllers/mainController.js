@@ -1,6 +1,10 @@
 const User = require('../models/User')
 
 module.exports.dashboard_get = async (req, res) => {
+    res.status(200).json({})
+}
+
+module.exports.users_get = async (req, res) => {
     const userList = await User.find({role: { $nin: ['Admin'] }}, { password: 0 })
     res.status(200).json({ userList })
 }
