@@ -10,6 +10,7 @@ app.use(cors());
 const getRoute = require('./routes/getRoute')
 const postRoute = require('./routes/postRoute')
 const studentRoute = require('./routes/studentRoute')
+const putpatchRoute = require('./routes/putpatchRoute')
 
 const port = process.env.PORT || 3001;
 
@@ -34,6 +35,7 @@ app.use(cookieParser())
 
 app.use(getRoute)
 app.use(postRoute)
+app.use(putpatchRoute)
 app.use(studentRoute)
 
 
