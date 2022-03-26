@@ -7,7 +7,6 @@ const Student = require('../models/Student')
 module.exports.student_get = async (req, res) => {
     try {
         const students = await Student.find()
-        console.log(students)
         res.status(200).json(students)
     } catch (error) {
         
@@ -18,8 +17,10 @@ module.exports.student_get_one = async (req, res) => {
     
     try {
         const studentInfo = await Student.findById(req.params.id)
+        console.log(req.params)
         res.status(200).json(studentInfo)
     } catch (error) {
+        console.log(error)
         res.status(404).send()
     }
 }
